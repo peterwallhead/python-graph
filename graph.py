@@ -1,5 +1,6 @@
 class Graph:
-    graph = {}
+    def __init__(self):
+      self.graph = {}
 
     def showGraph(self):
         return self.graph
