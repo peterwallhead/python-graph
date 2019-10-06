@@ -1,5 +1,6 @@
 class Graph:
-    graph = {}
+    def __init__(self):
+        self.graph = {}
 
     def showGraph(self):
         return self.graph
@@ -7,6 +8,19 @@ class Graph:
     def addNode(self, node):
         if node not in self.graph:
             self.graph[node] = {'edges':{}}
+            return True
+
+    def findNode(self, node):
+        if node in self.graph:
+            return True
+        else:
+            return False
+
+    def getNode(self, node):
+        if node in self.graph:
+            return self.graph[node]
+        else:
+            return False
 
     def removeNode(self, node):
         try:
@@ -15,6 +29,7 @@ class Graph:
                 if self.graph[edge]['edges'][node]:
                     del self.graph[edge]['edges'][node]
             del self.graph[node]
+            return True
         except:
             return False
 
@@ -22,15 +37,9 @@ class Graph:
         if startNode in self.graph and endNode in self.graph:
             self.graph[startNode]['edges'][endNode] = True
             self.graph[endNode]['edges'][startNode] = True
-
-    def removeEdge(self, startNode, endNode):
-        if startNode in self.graph and endNode in self.graph:
-            del self.graph[startNode]['edges'][endNode]
-            del self.graph[endNode]['edges'][startNode]
-
-    def findNode(self, node):
-        if node in self.graph:
-            return self.graph[node]
+            return True
+        else:
+            return False
 
     def findEdge(self, startNode, endNode):
         try:
@@ -40,28 +49,10 @@ class Graph:
         except:
             return False
 
-graph = Graph()
-
-#Add nodes
-graph.addNode("A")
-graph.addNode("B")
-graph.addNode("C")
-graph.addNode("D")
-graph.addNode("D") # Duplicate node addition attempted
-print(graph.showGraph())
-
-#Add edges between nodes
-graph.addEdge("A","B")
-graph.addEdge("C","D")
-graph.addEdge("D","A")
-print(graph.showGraph())
-
-#Search graph
-print(graph.findNode("B"))
-print(graph.findEdge("B","D"))
-
-#Modify graph
-graph.removeNode("A")
-graph.removeNode("A") # Node doesn't exist so this will return false
-graph.removeEdge("C","D")
-print(graph.showGraph())
+    def removeEdge(self, startNode, endNode):
+        if startNode in self.graph and endNode in self.graph:
+            del self.graph[startNode]['edges'][endNode]
+            del self.graph[endNode]['edges'][startNode]
+            return True
+        else:
+            return False
